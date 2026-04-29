@@ -1,0 +1,84 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "819f8528-3884-4dfd-9c62-e41dbc4b5480",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Predicted Salary: 73042.01180594409\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\aniket\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\sklearn\\utils\\validation.py:2691: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names\n",
+      "  warnings.warn(\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "from sklearn.linear_model import LinearRegression\n",
+    "\n",
+    "# Load data\n",
+    "data = pd.read_csv(\"Salary_Data.csv\")\n",
+    "\n",
+    "# Fix column names (important)\n",
+    "data.columns = ['YearsExperience', 'Salary']\n",
+    "\n",
+    "# Convert to numeric\n",
+    "data['YearsExperience'] = pd.to_numeric(data['YearsExperience'], errors='coerce')\n",
+    "data['Salary'] = pd.to_numeric(data['Salary'], errors='coerce')\n",
+    "\n",
+    "# Remove nulls\n",
+    "data = data.dropna()\n",
+    "\n",
+    "# Train model\n",
+    "X = data[['YearsExperience']]\n",
+    "y = data['Salary']\n",
+    "\n",
+    "model = LinearRegression()\n",
+    "model.fit(X, y)\n",
+    "\n",
+    "# Prediction\n",
+    "pred = model.predict([[5]])\n",
+    "print(\"Predicted Salary:\", pred[0])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "8f1b52bb-cfb8-4cf6-8a09-17a0d72c22a8",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.14.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
